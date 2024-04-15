@@ -7,7 +7,7 @@ import java.util.Properties;
 public abstract class API {
 
     /* *******************************  GENERIC  ***************************** */
-    public static final String GEN_REQ_VERSION = "/api/v1/";
+    public static final String GEN_REQ_VERSION = "/api/";
     public static final String GEN_MSG = "message";
     public static final String GEN_DATA = "data";
     public static final String GEN_TKN = "token";

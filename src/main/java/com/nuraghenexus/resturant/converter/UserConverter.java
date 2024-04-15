@@ -15,14 +15,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserConverter extends AbstractConverter<User, UserDTO> {
 
-	private BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
+	private Argon2PasswordEncoder encoder;
 
-	/**
-	 * Converts a UserDTO object to a User object.
-	 *
-	 * @param userDTO The UserDTO object to be converted.
-	 * @return A User object.
-	 */
 	@Override
 	public User toEntity(UserDTO userDTO) {
 		User user = null;
@@ -40,12 +34,6 @@ public class UserConverter extends AbstractConverter<User, UserDTO> {
 		return user;
 	}
 
-	/**
-	 * Converts a User object to a UserDTO object.
-	 *
-	 * @param user The User object to be converted.
-	 * @return A UserDTO object.
-	 */
 	@Override
 	public UserDTO toDTO(User user) {
 		UserDTO userDTO = null;
@@ -63,12 +51,6 @@ public class UserConverter extends AbstractConverter<User, UserDTO> {
 		return userDTO;
 	}
 
-	/**
-	 * Converts a User object to a UserDTO object.
-	 *
-	 * @param user The User object to be converted.
-	 * @return A UserDTO object.
-	 */
 	public FindByEoURequest toUserForVT(User user) {
 		FindByEoURequest findByEoURequest = null;
 		if (user != null) {
