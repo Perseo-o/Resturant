@@ -101,16 +101,16 @@ public class ResponseUtilController {
 
     /**
      * Converts a UserDTO object to a User object.
-     * @param findByEoURequest The UserDTO object to convert.
+     * @param FindByEmailRequest The UserDTO object to convert.
      * @return User object converted from the UserDTO object.
      */
-    public static User handleVTKRecoveryUser(FindByEoURequest findByEoURequest) {
+    public static User handleVTKRecoveryUser(FindByEoURequest FindByEmailRequest) {
         return new User(
-                findByEoURequest.getId(),
-                findByEoURequest.getEmail(),
-                findByEoURequest.getUsername(),
-                findByEoURequest.isAccountNonLocked(),
-                findByEoURequest.isEnabled()
+                FindByEmailRequest.getId(),
+                FindByEmailRequest.getEmail(),
+                FindByEmailRequest.getUsername(),
+                FindByEmailRequest.isAccountNonLocked(),
+                FindByEmailRequest.isEnabled()
         );
     }
 }

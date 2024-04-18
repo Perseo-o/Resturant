@@ -14,21 +14,11 @@ import com.nuraghenexus.resturant.service.ServiceDTO;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * AbstractController is a generic abstract class that provides common CRUD operations for controllers.
- *
- * @param <DTO> The DTO (Data Transfer Object) type handled by the controller.
- */
 public abstract class AbstractController<DTO> {
 
 	@Autowired
 	private ServiceDTO<DTO> service;
 
-	/**
-	 * Retrieves all entities.
-	 *
-	 * @return ResponseEntity containing a map with the result of the operation and HTTP status.
-	 */
 	@GetMapping(API.GET_ALL)
 	public ResponseEntity<Map<String, Object>> getAll() {
 		return ResponseUtilController.handleGenericResponse(
@@ -36,25 +26,14 @@ public abstract class AbstractController<DTO> {
 				API.GEN_FOUNDS);
 	}
 
-	/**
-	 * Creates a new entity.
-	 *
-	 * @param dto The DTO object containing data for the new entity.
-	 * @return ResponseEntity containing a map with the result of the operation and HTTP status.
-	 */
 	@PostMapping(API.CREATE)
 	public ResponseEntity<Map<String, Object>> create(@RequestBody DTO dto) {
+		System.out.println(dto);
 		return ResponseUtilController.handleGenericResponse(
 				service.create(dto),
 				API.GEN_CRE_SUCCESS);
 	}
 
-	/**
-	 * Retrieves a single entity by its ID.
-	 *
-	 * @param id The ID of the entity to retrieve.
-	 * @return ResponseEntity containing a map with the result of the operation and HTTP status.
-	 */
 	@GetMapping(API.READ)
 	public ResponseEntity<Map<String, Object>> read(@RequestParam(API.ID) Long id) {
 		return ResponseUtilController.handleGenericResponse(
@@ -62,12 +41,6 @@ public abstract class AbstractController<DTO> {
 				API.GEN_FOUND);
 	}
 
-	/**
-	 * Updates an existing entity.
-	 *
-	 * @param dto The DTO object containing updated data for the entity.
-	 * @return ResponseEntity containing a map with the result of the operation and HTTP status.
-	 */
 	@PutMapping(API.UPDATE)
 	public ResponseEntity<Map<String, Object>> update(@RequestBody DTO dto) {
 		Map<String, Object> map = new LinkedHashMap<>();
@@ -77,12 +50,6 @@ public abstract class AbstractController<DTO> {
 				API.GEN_UPD_SUCCESS);
 	}
 
-	/**
-	 * Deletes an entity by its ID.
-	 *
-	 * @param id The ID of the entity to delete.
-	 * @return ResponseEntity containing a map with the result of the operation and HTTP status.
-	 */
 	@DeleteMapping(API.DELETE)
 	public ResponseEntity<Map<String, Object>> delete(@RequestParam(API.ID) Long id) {
 		Map<String, Object> map = new LinkedHashMap<>();

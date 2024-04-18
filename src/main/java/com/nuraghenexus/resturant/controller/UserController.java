@@ -12,7 +12,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(API.USER_REQ_MAP)
-@CrossOrigin(origins = PROP.CORS_ORIGIN_PROP)
 public class UserController extends AbstractController<UserDTO>{
 
 	@Autowired
@@ -21,7 +20,7 @@ public class UserController extends AbstractController<UserDTO>{
 	@GetMapping(API.USER_REQ_USER_BY_E_U)
 	public ResponseEntity<Map<String, Object>> getUserByEmail(@RequestParam String emailOrUsername){
 		return ResponseUtilController.handleGenericResponse(
-				userService.getUserByEmail(emailOrUsername),
+				userService.getUserByEmailOrUsername(emailOrUsername),
 				API.GEN_FOUND
 		);
 	}

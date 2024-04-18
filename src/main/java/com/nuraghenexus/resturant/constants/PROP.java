@@ -5,9 +5,6 @@ public class PROP {
     public static final String SECRETS = "classpath:secrets.properties";
 
     // VTOKEN
-    // EMAIL SENDER
-    public static final String MAIL = "${spring.mail.username}";
-    public static final String PASS = "${spring.mail.password}";
 
     // MAIL PROPS
     public static final String MAIL_AUTH = "mail.smtp.auth";
