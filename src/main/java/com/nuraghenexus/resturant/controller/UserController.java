@@ -1,7 +1,6 @@
 package com.nuraghenexus.resturant.controller;
 
 import com.nuraghenexus.resturant.constants.API;
-import com.nuraghenexus.resturant.constants.PROP;
 import com.nuraghenexus.resturant.dto.*;
 import com.nuraghenexus.resturant.service.*;
 import com.nuraghenexus.resturant.util.ResponseUtilController;

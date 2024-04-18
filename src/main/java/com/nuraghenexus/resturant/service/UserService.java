@@ -42,10 +42,10 @@ public class UserService extends AbstractService<User, UserDTO> implements UserD
 	@Autowired
 	private JwtService jwtService;
 
-
-
 	@Autowired
 	private AuthenticationManager authenticationManager;
+
+
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -135,24 +135,22 @@ public class UserService extends AbstractService<User, UserDTO> implements UserD
 			User userConverted = userResultToConvert.get();
 			AuthResponse authResponse = convertToAuthResponseDTO(userConverted);
 			if (encoder.matches(userToCheck.getPassword(), userConverted.getPassword())) {
-				if(userConverted.isEnabled()) {
+				if (userConverted.isEnabled()) {
 					String jwtToken = jwtService.generateToken(userConverted);
 					map.put(API.GEN_DATA, authResponse);
 					map.put(API.GEN_MSG, API.AUTH_LOGGED_IN);
 					map.put(API.GEN_TKN, jwtToken);
 					map.put(API.GEN_STATUS, HttpStatus.ACCEPTED);
-					return map;
-				} else {
+                } else {
 					map.put(API.GEN_MSG, API.AUTH_GO_TO_MAIL);
 					map.put(API.GEN_STATUS, HttpStatus.NOT_ACCEPTABLE);
-					return map;
-				}
-			} else {
+                }
+            } else {
 				map.put(API.GEN_MSG, API.AUTH_PASS_ERR);
 				map.put(API.GEN_STATUS, HttpStatus.NOT_ACCEPTABLE);
-				return map;
-			}
-		}
+            }
+            return map;
+        }
 		map.put(API.GEN_MSG, API.AUTH_ACCOUNT_NOT_EXISTS);
 		map.put(API.GEN_STATUS, HttpStatus.NOT_ACCEPTABLE);
 		return map;
@@ -166,7 +164,7 @@ public class UserService extends AbstractService<User, UserDTO> implements UserD
 					.username(request.getUsername())
 					.password(encoder.encode(request.getPassword()))
 					.createdAt(LocalDateTime.now())
-					.isAccountNonLocked(false)
+					.isAccountNonLocked(true)
 					.isEnabled(true)
 					.role(Roles.USER)
 					.build();
