@@ -4,6 +4,7 @@ import com.nuraghenexus.resturant.constants.API;
 import com.nuraghenexus.resturant.util.ResponseUtilController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,48 +13,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.nuraghenexus.resturant.service.ServiceDTO;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+
 
 public abstract class AbstractController<DTO> {
 
 	@Autowired
 	private ServiceDTO<DTO> service;
 
-	@GetMapping(API.GET_ALL)
-	public ResponseEntity<Map<String, Object>> getAll() {
-		return ResponseUtilController.handleGenericResponse(
-				service.getAll(),
-				API.GEN_FOUNDS);
+
+	@GetMapping("/getAll")
+	@PreAuthorize("hasRole('USER')")
+	public List<DTO> getAll() {
+		return service.getAll();
 	}
 
-	@PostMapping(API.CREATE)
-	public ResponseEntity<Map<String, Object>> create(@RequestBody DTO dto) {
-		System.out.println(dto);
-		return ResponseUtilController.handleGenericResponse(
-				service.create(dto),
-				API.GEN_CRE_SUCCESS);
+
+	@PostMapping("/create")
+	@PreAuthorize("hasRole('USER')")
+	public DTO create(@RequestBody DTO dto) {return service.create(dto); }
+
+	@GetMapping("/read")
+	@PreAuthorize("hasRole('USER')")
+	public DTO read(@RequestParam("id") Long id) {
+		return service.read(id);
 	}
 
-	@GetMapping(API.READ)
-	public ResponseEntity<Map<String, Object>> read(@RequestParam(API.ID) Long id) {
-		return ResponseUtilController.handleGenericResponse(
-				service.read(id),
-				API.GEN_FOUND);
+	@PutMapping("/update")
+	@PreAuthorize("hasRole('USER')")
+	public DTO update(@RequestBody DTO dto) {
+		return service.update(dto);
 	}
 
-	@PutMapping(API.UPDATE)
-	public ResponseEntity<Map<String, Object>> update(@RequestBody DTO dto) {
-		Map<String, Object> map = new LinkedHashMap<>();
-		map.put(API.GEN_MSG, service.update(dto));
-		return ResponseUtilController.handleGenericResponse(
-				map,
-				API.GEN_UPD_SUCCESS);
-	}
 
-	@DeleteMapping(API.DELETE)
-	public ResponseEntity<Map<String, Object>> delete(@RequestParam(API.ID) Long id) {
-		Map<String, Object> map = new LinkedHashMap<>();
-		map.put(API.GEN_MSG, service.delete(id));
-		return ResponseUtilController.handleDeleteResponse(map);
+	@DeleteMapping("/delete")
+	public boolean delete(@RequestParam("id") Long id) {
+		return service.delete(id);
 	}
 }

@@ -1,6 +1,5 @@
 package com.nuraghenexus.resturant.dto;
 
-import com.nuraghenexus.resturant.model.enumerations.Roles;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/plate")
+@RequestMapping("/api/v1/plate")
 public class PlateController extends AbstractController<PlateDTO>{
 
 }

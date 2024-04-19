@@ -1,56 +1,56 @@
 package com.nuraghenexus.resturant.model;
 
-import com.nuraghenexus.resturant.model.enumerations.Roles;
-import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+import com.nuraghenexus.resturant.model.enumerations.Roles;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@ToString
+@Table(name = "users")
 public class User implements UserDetails {
 
 	@Id
-	@OnDelete(action = OnDeleteAction.CASCADE)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	Long id;
+
+	String firstName;
+
+	String lastName;
 
 	@Column(unique = true)
-	private String email;
+	String email;
 
-	@Column(unique = true)
-	private String username;
-	private String password;
-	private boolean isAccountNonLocked;
-	private boolean isEnabled;
-	private LocalDateTime createdAt;
+	String password;
 
 	@Enumerated(EnumType.STRING)
-	private Roles role;
+	Roles role;
 
-	public User(Long id, boolean isAccountNonLocked, boolean isEnabled) {
-		this.id = id;
-		this.isAccountNonLocked = isAccountNonLocked;
-		this.isEnabled = isEnabled;
-	}
+	LocalDateTime createdAt;
 
-	public User(Long id, String email, String username, boolean isAccountNonLocked, boolean isEnabled) {
-		this.id = id;
-		this.email = email;
-		this.username = username;
-		this.isAccountNonLocked = isAccountNonLocked;
-		this.isEnabled = isEnabled;
-	}
+	LocalDateTime updatedAt;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -59,12 +59,8 @@ public class User implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return username;
-	}
-
-	@Override
-	public String getPassword() {
-		return password;
+		// our "username" for security is the email field
+		return email;
 	}
 
 	@Override
@@ -74,7 +70,7 @@ public class User implements UserDetails {
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return isAccountNonLocked;
+		return true;
 	}
 
 	@Override
@@ -84,7 +80,7 @@ public class User implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return this.isEnabled;
+		return true;
 	}
 
 }

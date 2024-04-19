@@ -19,6 +19,6 @@ public class Plate {
     @Column(unique = true)
     private String name;
 
-    @OneToMany
+    @ManyToMany
     private List<Ingredient> ingredientList;
 }

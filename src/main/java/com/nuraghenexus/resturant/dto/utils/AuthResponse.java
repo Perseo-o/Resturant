@@ -1,18 +1,16 @@
 package com.nuraghenexus.resturant.dto.utils;
 
-import com.nuraghenexus.resturant.model.enumerations.Roles;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class AuthResponse {
-
-    private Long id;
-    private String email;
-    private String username;
-    private boolean isAccountNonLocked;
-    private Roles role;
+    private String firstName;
+    private String lastName;
+    private String token;
 }

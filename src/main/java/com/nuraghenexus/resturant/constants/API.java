@@ -20,7 +20,6 @@ public abstract class API {
     public static final String GEN_UPD_SUCCESS = "Aggiornato con successo!";
     public static final String GEN_DEL_SUCCESS = "Eliminato con successo!";
     public static final String GEN_DATA_NOT_EXISTS = "Il dato ricercato non esiste!";
-    public static final String GEN_CANT_USE_API = "Non sei abilitato per utilizzare questa api";
     public static final String GEN_NOT_FOUND_CHECK = "on trovat";
     /* *********************************************************************** */
 
@@ -55,15 +54,10 @@ public abstract class API {
     public static final String USER_REQ_MAP = API.GEN_REQ_VERSION + "user";
 
     // SERVICE
-    public static final String USER_REQ_USER_BY_E_U = "/getUserByEmailOrUsername";
     public static final String USER_NOT_FOUND = "Utente non trovato";
     public static final String USER_REGEX_USRNM = "^[A-Z][a-zA-Z0-9]{4,14}$";
     public static final String USER_REGEX_PASS = "^[A-Z][a-zA-Z0-9]{7,24}$";
 
-    // FUNCTIONS
-    public static String usernameExc(String username){
-        return String.format("Utente con username %s non trovato", username);
-    }
     /* *********************************************************************** */
 
 
@@ -72,8 +66,8 @@ public abstract class API {
     /* ***************************  AUTHENTICATION  ************************** */
     // CONTROLLER
     public static final String AUTH_REQ_MAP = API.GEN_REQ_VERSION + "auth";
-    public static final String AUTH_REGISTER = "/register";
-    public static final String AUTH_AUTHENTICATE = "/authenticate";
+    public static final String AUTH_REGISTER = "/signup";
+    public static final String AUTH_AUTHENTICATE = "/signin";
 
     // SERVICE
 
@@ -92,12 +86,6 @@ public abstract class API {
     public static final String AUTH_PASS_ERR = "Oops! Password errata, riprova!";
 
     // FUNCTIONS
-    public static final String AUTH_INVALID_USERNAME = """
-            Inserire uno username valido!
-            \nInizia con una lettera minuscola ([a-z]).
-            \nContiene almeno un numero ((?=.*[0-9])).
-            \nHa una lunghezza totale compresa tra 6 e 25 caratteri ({5,24}).
-            """;
     public static final String AUTH_INVALID_PASSWORD = """
             Inserire una password valida!
             \nChe inizi con una lettera maiuscola .

@@ -1,16 +1,17 @@
 package com.nuraghenexus.resturant.service;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ServiceDTO<DTO> {
 
-	public Map<String, Object>  getAll();
+	List<DTO> getAll();
 
-	public Map<String, Object> create (DTO dto);
+	DTO create (DTO dto);
 
-	public Map<String, Object> read(Long id);
+	DTO read(Long id);
 
-	public String update (DTO dto);
+	DTO update (DTO dto);
 
-	public String delete (Long id);
+	boolean delete (Long id);
 }

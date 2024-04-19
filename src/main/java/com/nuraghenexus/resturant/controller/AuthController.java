@@ -1,30 +1,33 @@
 package com.nuraghenexus.resturant.controller;
 
 import com.nuraghenexus.resturant.constants.API;
-import com.nuraghenexus.resturant.dto.utils.LoginRequest;
-import com.nuraghenexus.resturant.dto.utils.RegisterRequest;
-import com.nuraghenexus.resturant.service.UserService;
-import com.nuraghenexus.resturant.util.ResponseUtilController;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import com.nuraghenexus.resturant.dto.utils.AuthResponse;
+import com.nuraghenexus.resturant.service.AuthService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import com.nuraghenexus.resturant.dto.utils.SignInRequest;
+import com.nuraghenexus.resturant.dto.utils.SignUpRequest;
+
+import lombok.RequiredArgsConstructor;
+
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(API.AUTH_REQ_MAP)
+@RequiredArgsConstructor
 public class AuthController {
 
-    private final UserService service;
+    private final AuthService authService;
 
     @PostMapping(API.AUTH_REGISTER)
-    public ResponseEntity<Map<String, Object>> register(@RequestBody RegisterRequest request) {
-        return ResponseUtilController.handleAuthResponses(service.register(request));
+    public AuthResponse signup(@RequestBody SignUpRequest request) {
+        return authService.signup(request);
     }
 
     @PostMapping(API.AUTH_AUTHENTICATE)
-    public ResponseEntity<Map<String, Object>> authenticate(@RequestBody LoginRequest request){
-        return ResponseUtilController.handleAuthResponses(service.authenticate(request));
+    public AuthResponse signin(@RequestBody SignInRequest request) {
+        return authService.signin(request);
     }
 }

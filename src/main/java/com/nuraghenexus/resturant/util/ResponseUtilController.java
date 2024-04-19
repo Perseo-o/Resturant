@@ -1,10 +1,10 @@
 package com.nuraghenexus.resturant.util;
 
 import com.nuraghenexus.resturant.constants.API;
-import com.nuraghenexus.resturant.dto.utils.FindByEoURequest;
 import com.nuraghenexus.resturant.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -76,41 +76,4 @@ public class ResponseUtilController {
         return new ResponseEntity<>(map, status);
     }
 
-    /**
-     * Handles verification token responses based on the provided response and case to check.
-     * @param response The response to handle.
-     * @param caseToCheck The case to check against the response.
-     * @return ResponseEntity containing a map with the appropriate response message and status.
-     */
-    public static ResponseEntity<Map<String, Object>> handleVTKResponses(
-            String response,
-            String caseToCheck)
-    {
-        Map<String, Object> map = new LinkedHashMap<>();
-        if (response.equals(caseToCheck)) {
-            map.put(API.GEN_MSG, response);
-            return new ResponseEntity<>(map, HttpStatus.ACCEPTED);
-        } else if(response.contains(API.GEN_NOT_FOUND_CHECK)){
-            map.put(API.GEN_MSG, response);
-            return new ResponseEntity<>(map, HttpStatus.NOT_FOUND);
-        } else {
-            map.put(API.GEN_MSG, response);
-            return new ResponseEntity<>(map, HttpStatus.NOT_ACCEPTABLE);
-        }
-    }
-
-    /**
-     * Converts a UserDTO object to a User object.
-     * @param FindByEmailRequest The UserDTO object to convert.
-     * @return User object converted from the UserDTO object.
-     */
-    public static User handleVTKRecoveryUser(FindByEoURequest FindByEmailRequest) {
-        return new User(
-                FindByEmailRequest.getId(),
-                FindByEmailRequest.getEmail(),
-                FindByEmailRequest.getUsername(),
-                FindByEmailRequest.isAccountNonLocked(),
-                FindByEmailRequest.isEnabled()
-        );
-    }
 }
