@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-public class UserService extends AbstractService<User, UserDTO>  {
+public class UserService {
 
 	private final UserRepository userRepository;
 
