@@ -68,21 +68,20 @@ public abstract class API {
     public static final String AUTH_REQ_MAP = API.GEN_REQ_VERSION + "auth";
     public static final String AUTH_REGISTER = "/signup";
     public static final String AUTH_AUTHENTICATE = "/signin";
+    public static final String AUTH_DELETE = "/delete";
 
-    // SERVICE
+    //SERVICE
+    public static final String AUTH_SUCCESSFUL_DELETE = "Eliminazione completata con successo.";
+    public static final String AUTH_ERROR_DELETE = "Errore durante l'eliminazione: ";
 
     // SUCCESS
     public static final String AUTH_LOGGED_IN = "Ora sei loggato!";
     // ERRORS
-    public static final String AUTH_USERNAME_AND_EMAIL_CONFLICT = "Email e Username già in uso, ritenta!";
     public static final String AUTH_EMAIL_CONFLICT = "Email già in uso, ritenta!";
-    public static final String AUTH_USERNAME_CONFLICT = "Username già in uso, ritenta!";
     public static final String AUTH_INVALID_EMAIL = "Inserire una mail valida!";
     public static final String AUTH_SOMETHING_WENT_WRONG = "Qualcosa è andato storto!";
     public static final String AUTH_EMAIL_ERR = "Oops! Email errata, riprova!";
     public static final String AUTH_ACCOUNT_NOT_EXISTS = "Oops! Non esiste nessun account che corrisponda ai dati inseriti, riprova!";
-    public static final String AUTH_USERNAME_ERR = "Oops! Username errato, riprova!";
-    public static final String AUTH_GO_TO_MAIL = "Vai alla tua mail per attivare il tuo account prima di accedere";
     public static final String AUTH_PASS_ERR = "Oops! Password errata, riprova!";
 
     // FUNCTIONS

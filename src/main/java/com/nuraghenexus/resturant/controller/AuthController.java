@@ -3,10 +3,7 @@ package com.nuraghenexus.resturant.controller;
 import com.nuraghenexus.resturant.constants.API;
 import com.nuraghenexus.resturant.dto.utils.AuthResponse;
 import com.nuraghenexus.resturant.service.AuthService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.nuraghenexus.resturant.dto.utils.SignInRequest;
 import com.nuraghenexus.resturant.dto.utils.SignUpRequest;
@@ -29,5 +26,10 @@ public class AuthController {
     @PostMapping(API.AUTH_AUTHENTICATE)
     public AuthResponse signin(@RequestBody SignInRequest request) {
         return authService.signin(request);
+    }
+
+    @DeleteMapping(API.AUTH_DELETE)
+    public String delete(@RequestParam("id") Long id) {
+        return authService.delete(id);
     }
 }
